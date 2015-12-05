@@ -5,4 +5,11 @@
     <string name="LoginScreenText">Welcome to NappyZap Driver App!\nThis is where the login screen would normally be.</string>
     <string name="loginString">Login</string>
     <string name="title_activity_main">Map</string>
+
+    <string-array name="mNavArray">
+        <item>Navigation</item>
+        <item>Current Job</item>
+        <item>Job List</item>
+        <item>Logout</item>
+    </string-array>
 </resources>
