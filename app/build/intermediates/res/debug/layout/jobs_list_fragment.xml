@@ -3,10 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:layout_gravity="center_horizontal"
-        android:text="Jobs List Fragment" />
+        android:id="@+id/expandableJobList" />
 </LinearLayout><!-- From: file:/D:/Users/Aaron/Desktop/UCL_Stuff/Year_2/NappyZap/NappyZap-Driver/app/src/main/res/layout/jobs_list_fragment.xml -->

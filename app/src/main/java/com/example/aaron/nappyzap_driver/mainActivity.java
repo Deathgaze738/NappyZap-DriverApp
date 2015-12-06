@@ -2,11 +2,14 @@ package com.example.aaron.nappyzap_driver;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class mainActivity extends AppCompatActivity{
+public class mainActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     //hardcoded driver ID
     private int driverID = 1;
@@ -40,6 +43,12 @@ public class mainActivity extends AppCompatActivity{
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
+        curFragment = new NavFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, curFragment)
+                .commit();
+
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mNav));
         mDrawerList.setItemChecked(0, true);
@@ -54,10 +63,12 @@ public class mainActivity extends AppCompatActivity{
     }
 
     private void selectItem(int position) {
+        Log.d("MainActivity", "Item selected in side drawer.");
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.remove(curFragment);
+        ft.commit();
         if(position==0){
-            curFragment = MapFragment.newInstance();
-
-            mapSetUp();
+            curFragment = new NavFragment();
         }
         if(position==1) {
             curFragment = new CurrentJobFragment();
@@ -85,6 +96,9 @@ public class mainActivity extends AppCompatActivity{
     {
 
     }
+    @Override
+    public void onMapReady(GoogleMap map){
 
+    }
 }
 
