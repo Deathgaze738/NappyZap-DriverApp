@@ -7,7 +7,6 @@
     <string name="title_activity_main">Map</string>
     <string name="drawer_open">Opened</string>
     <string name="drawer_close">Closed</string>
-
     <string-array name="mNavArray">
         <item>Navigation</item>
         <item>Current Job</item>

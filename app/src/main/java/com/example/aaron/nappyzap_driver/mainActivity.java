@@ -29,10 +29,10 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private int driverID = 1;
 
     private Fragment curFragment;
-    private GoogleMap mMap;
     private String[] mNav;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +42,20 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mNav = getResources().getStringArray(R.array.mNavArray);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
+        //Sets main fragment
         curFragment = new NavFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, curFragment)
                 .commit();
-
+        //Initialises Drawer List
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mNav));
         mDrawerList.setItemChecked(0, true);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        //Checks if the GPS is enabled
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -64,9 +67,6 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void selectItem(int position) {
         Log.d("MainActivity", "Item selected in side drawer.");
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.remove(curFragment);
-        ft.commit();
         if(position==0){
             curFragment = new NavFragment();
         }
@@ -84,21 +84,21 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .replace(R.id.content_frame, curFragment)
                 .commit();
         mDrawerList.setItemChecked(position, true);
+        mDrawerList.setSelection(position);
         setTitle(mNav[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
+        Log.d("MainActivity", "Fragment successfully swapped");
     }
     public void logout()
     {
+        Log.d("MainActivity", "Logging Out");
         Intent intent = new Intent(this, LoginPlaceholder.class);
         startActivity(intent);
-    }
-    public void mapSetUp()
-    {
-
     }
     @Override
     public void onMapReady(GoogleMap map){
 
     }
+
 }
 
