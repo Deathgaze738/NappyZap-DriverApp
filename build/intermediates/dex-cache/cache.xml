@@ -58,6 +58,13 @@
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-d2a974620effb5e4a74d13b4ee7e36fc683000c2.jar" />
     </item>
     <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\NappyZap-Driver\volley\unspecified\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecd9437dafd5d9989133488133a9e2f66aaa6668">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-5e2ccde495b8131883d3bba9c20e03fbf7b83c61.jar" />
+    </item>
+    <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"

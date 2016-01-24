@@ -40,9 +40,7 @@ import java.util.Map;
  */
 public class NavFragment extends Fragment implements OnMapReadyCallback {
 
-    //GPS Manager
-    private GPSChecker gpsChecker;
-    CurrentPickup currentPickup;
+    public static GoogleMap map;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,10 +48,11 @@ public class NavFragment extends Fragment implements OnMapReadyCallback {
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        //Sets Locations
-        gpsChecker = new GPSChecker(getActivity());
-        currentPickup = new CurrentPickup(gpsChecker, 1, getActivity(), mapFragment.getMap());
+        map = mapFragment.getMap();
+        if(mainActivity.currentPickup.complete) {
+            //Initialize GSPTracker and update current pickup
+            mainActivity.currentPickup = new CurrentPickup(1, getActivity());
+        }
         Log.d("NavFragment", "Successfully inflated.");
         return v;
     }
@@ -61,8 +60,6 @@ public class NavFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap mMap) {
         if(mMap!=null) {
             mMap.setMyLocationEnabled(true);
-
-            Log.d("NavFragment", "Set Next Pickup");
         }
         else{
             Log.d("NavFragment", "Map was null");
