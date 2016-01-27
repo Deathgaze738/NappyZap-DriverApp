@@ -60,6 +60,11 @@ public class NavFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap mMap) {
         if(mMap!=null) {
             mMap.setMyLocationEnabled(true);
+            try {
+                mainActivity.currentPickup.updateMap(mMap);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         else{
             Log.d("NavFragment", "Map was null");

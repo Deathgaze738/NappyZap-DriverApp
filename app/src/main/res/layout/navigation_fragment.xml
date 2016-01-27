@@ -5,7 +5,7 @@
     android:name="com.google.android.gms.maps.MapFragment"
     android:id="@+id/map"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="5dip"
     map:uiRotateGestures="false"
     map:uiScrollGestures="false"
     map:uiZoomGestures="false"

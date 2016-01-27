@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,6 +39,7 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static GPSChecker gpsChecker;
     public static CurrentPickup currentPickup;
 
+    private static int lastClicked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +49,38 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mNav = getResources().getStringArray(R.array.mNavArray);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        if((new File("cache/currentPickup.data")).exists()){
-            currentPickup.load(this);
+        File file;
+        file = getBaseContext().getFileStreamPath("currentPickup.data");
+        if(file.exists()){
+            Log.d("FileLoad", "File Exists, loading...");
+            CurrentPickup.load(this);
+            //file.delete();
         }
         else{
+            Log.d("FileLoad", "No file, creating new...");
             CurrentPickup temp = new CurrentPickup();
-            temp.save(this);
+            currentPickup = temp;
         }
+        Log.d("String", currentPickup.getString());
+
         //Sets main fragment
         curFragment = new NavFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, curFragment)
                 .commit();
+
         //Initialises Drawer List
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mNav));
         mDrawerList.setItemChecked(0, true);
+
+        if(CurrentPickup.complete){
+
+        }
+        else if(!CurrentPickup.complete){
+
+        }
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
@@ -76,18 +93,22 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void selectItem(int position) {
         Log.d("MainActivity", "Item selected in side drawer.");
-        if(position==0){
-            curFragment = new NavFragment();
+        if(lastClicked != position) {
+            if (position == 0) {
+                curFragment = new NavFragment();
+                swapFragment(curFragment, position);
+            }
+            if (position == 1) {
+                curFragment = new CurrentJobFragment();
+                swapFragment(curFragment, position);
+            }
+            if (position == 2) {
+                logout();
+            }
+            lastClicked = position;
         }
-        if(position==1) {
-            curFragment = new CurrentJobFragment();
-        }
-        if(position==2){
-            curFragment = new JobsListFragment();
-        }
-        if(position==3){
-            logout();
-        }
+    }
+    private void swapFragment(Fragment cur, int position){
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, curFragment)
@@ -98,6 +119,7 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mDrawerLayout.closeDrawer(mDrawerList);
         Log.d("MainActivity", "Fragment successfully swapped");
     }
+
     public void logout()
     {
         Log.d("MainActivity", "Logging Out");
@@ -113,13 +135,13 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onDestroy(){
         currentPickup.save(this);
         try{
-            Fragment fragment = ((Fragment) getFragmentManager().findFragmentById(R.id.map));
+            Fragment fragment = getFragmentManager().findFragmentById(R.id.map);
             FragmentTransaction ft = this.getFragmentManager().beginTransaction();
             ft.remove(fragment);
             ft.commit();
             Log.d("Fragment", "Successfully destroyed");
         }catch(Exception e){
-            Log.d("Fragment", "Not destroyed");
+            Log.d("Fragment", "No map to destroy");
             e.printStackTrace();
         }
         super.onDestroy();

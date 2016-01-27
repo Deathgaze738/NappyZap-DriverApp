@@ -10,7 +10,6 @@
     <string-array name="mNavArray">
         <item>Navigation</item>
         <item>Current Job</item>
-        <item>Job List</item>
         <item>Logout</item>
     </string-array>
 </resources>

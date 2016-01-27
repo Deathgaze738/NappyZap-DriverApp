@@ -166,41 +166,45 @@ MERGED from NappyZap-Driver:volley:unspecified:9:5
 		ADDED from AndroidManifest.xml:21:9
 activity#com.example.aaron.nappyzap_driver.LoginPlaceholder
 ADDED from AndroidManifest.xml:22:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:25:13
 	android:label
 		ADDED from AndroidManifest.xml:24:13
 	android:name
 		ADDED from AndroidManifest.xml:23:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:25:13
+ADDED from AndroidManifest.xml:26:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:26:17
+ADDED from AndroidManifest.xml:27:17
 	android:name
-		ADDED from AndroidManifest.xml:26:25
+		ADDED from AndroidManifest.xml:27:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:28:17
+ADDED from AndroidManifest.xml:29:17
 	android:name
-		ADDED from AndroidManifest.xml:28:27
+		ADDED from AndroidManifest.xml:29:27
 meta-data#com.google.android.geo.API_KEY
-ADDED from AndroidManifest.xml:39:9
+ADDED from AndroidManifest.xml:40:9
 	android:value
+		ADDED from AndroidManifest.xml:42:13
+	android:name
 		ADDED from AndroidManifest.xml:41:13
-	android:name
-		ADDED from AndroidManifest.xml:40:13
 activity#com.example.aaron.nappyzap_driver.mainActivity
-ADDED from AndroidManifest.xml:43:9
+ADDED from AndroidManifest.xml:44:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:47:13
 	android:label
-		ADDED from AndroidManifest.xml:45:13
+		ADDED from AndroidManifest.xml:46:13
 	android:name
-		ADDED from AndroidManifest.xml:44:13
+		ADDED from AndroidManifest.xml:45:13
 uses-feature#0x00020000
-ADDED from AndroidManifest.xml:47:9
+ADDED from AndroidManifest.xml:49:9
 MERGED from com.google.android.gms:play-services-maps:8.3.0:22:5
 MERGED from com.google.android.gms:play-services-maps:8.3.0:22:5
 MERGED from com.google.android.gms:play-services-maps:8.3.0:22:5
 	android:glEsVersion
-		ADDED from AndroidManifest.xml:48:13
+		ADDED from AndroidManifest.xml:50:13
 	android:required
-		ADDED from AndroidManifest.xml:49:13
+		ADDED from AndroidManifest.xml:51:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.2.0:20:5

@@ -2,6 +2,90 @@
 <items version="2" >
 
     <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="27775d59b16610ac76f1b83693fedd9520396332">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-f47924d8ea421a0befc4119459004b7bcda82571.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-c659c800cdc2a112d26c60b2a0c600d1107f7722.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="724ce977487ab3a215d4d2eb47d8dccd9f30013f">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-ba2eac09ed9224ce3a2eec3d9ce7e4deab3f8e24.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\NappyZap-Driver\volley\unspecified\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f146f2cb52e4b3df541cd68ea35ae18bf23d3540">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-5e2ccde495b8131883d3bba9c20e03fbf7b83c61.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="eb576427887e497cd958a475475f9206e38dc314">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-a80ae6c110ce4c3c6c6f77eb73a0a9155ef4992e.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-d885c08806c5f76b1570c5b7f3f60203b54a6863.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-fac529006b9dfab3cf8aa0bf8a502a988a363fc8.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-15100f412cc8549fcac1312e28bb67cb4882bf6f.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9f825dc52fb0f1e80e1aef436ce8c04905f8e993">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-c5384114ededc0211b76802b6df3c4742d0d1020.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0af4f577b4a21eb9be2a7f52e33b077b67e6d9f8">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-6b31b89d748d8772f6a3c197a26b433b768e98d7.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="697679619b00837e3d09e9988a2e1e2a9009d502">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-af7e61f80011ce823d8a4afdac4fdb1db786ab8c.jar" />
+    </item>
+    <item
+        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
+        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-c302c61fe496c2335c4363ea914705dfe3d1ed08.jar" />
+    </item>
+    <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -23,13 +107,6 @@
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-b810eaeae99bb112250875f531a56bfaf02ccdd8.jar" />
     </item>
     <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="27775d59b16610ac76f1b83693fedd9520396332">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-f47924d8ea421a0befc4119459004b7bcda82571.jar" />
-    </item>
-    <item
         jar="D:\Users\Aaron\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -37,32 +114,11 @@
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-540f1e6492e41f451d6006c26de23718c14daa68.jar" />
     </item>
     <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-c659c800cdc2a112d26c60b2a0c600d1107f7722.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="724ce977487ab3a215d4d2eb47d8dccd9f30013f">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-ba2eac09ed9224ce3a2eec3d9ce7e4deab3f8e24.jar" />
-    </item>
-    <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-d2a974620effb5e4a74d13b4ee7e36fc683000c2.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\NappyZap-Driver\volley\unspecified\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecd9437dafd5d9989133488133a9e2f66aaa6668">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-5e2ccde495b8131883d3bba9c20e03fbf7b83c61.jar" />
     </item>
     <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.3.0\classes.jar"
@@ -107,13 +163,6 @@
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-712878edcf3ae5a51bd8d3a3ecc714b766edf7a5.jar" />
     </item>
     <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="eb576427887e497cd958a475475f9206e38dc314">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-a80ae6c110ce4c3c6c6f77eb73a0a9155ef4992e.jar" />
-    </item>
-    <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -126,13 +175,6 @@
         revision="21.1.2"
         sha1="6d9ed9a288364688e7fcf6704776284dac1eb42e">
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-fd71ef944eedd3011c5592ba717185ae8ddb207d.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-d885c08806c5f76b1570c5b7f3f60203b54a6863.jar" />
     </item>
     <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.3.0\classes.jar"
@@ -163,27 +205,6 @@
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-69e4abca8286ceeb7a1b6083abf23f9073fb5a4d.jar" />
     </item>
     <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-fac529006b9dfab3cf8aa0bf8a502a988a363fc8.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-15100f412cc8549fcac1312e28bb67cb4882bf6f.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9f825dc52fb0f1e80e1aef436ce8c04905f8e993">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-c5384114ededc0211b76802b6df3c4742d0d1020.jar" />
-    </item>
-    <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -191,32 +212,11 @@
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-8f62b3238f9bfc02f27a18e00f603767775a5eb8.jar" />
     </item>
     <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0af4f577b4a21eb9be2a7f52e33b077b67e6d9f8">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-6b31b89d748d8772f6a3c197a26b433b768e98d7.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="697679619b00837e3d09e9988a2e1e2a9009d502">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-af7e61f80011ce823d8a4afdac4fdb1db786ab8c.jar" />
-    </item>
-    <item
         jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="71eda10e33212e44245524b5087366ff8d805825">
         <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-80270ff37ff76bed170d8142ff07737555874cdd.jar" />
-    </item>
-    <item
-        jar="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
-        <dex dex="D:\Users\Aaron\Desktop\UCL_Stuff\Year_2\NappyZap\NappyZap-Driver\app\build\intermediates\pre-dexed\debug\classes-c302c61fe496c2335c4363ea914705dfe3d1ed08.jar" />
     </item>
 
 </items>

@@ -29,6 +29,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Aaron on 12/12/2015.
@@ -46,12 +49,22 @@ public class CurrentPickup implements Serializable {
     static int pickupID;
     static boolean complete;
     private JsonObjectRequest jsObjRequest;
+    public final static Lock lock = new ReentrantLock();
+    public final static Condition mapReady = lock.newCondition();
 
     public CurrentPickup(){
         complete = true;
+        name = "No Current Pickup";
+        phoneNo = "";
+        pickupLoc = new LatLng(0, 0);
+        address = "Please request a new pickup!";
+        binLocation = "";
+        details = "";
+        sizeOfPickup = 0;
     }
 
     public CurrentPickup(final int driverID, final Context ctx) {
+        lock.lock();
         JSONObject params = new JSONObject();
         try {
             params.put("driverID", Integer.toString(driverID));
@@ -62,7 +75,13 @@ public class CurrentPickup implements Serializable {
             e.printStackTrace();
         }
         Log.d("CurrentPickup", "Request Prepared");
-        jsObjRequest = new JsonObjectRequest
+        jsObjRequest = getJsonObject(ctx, params);
+        Log.d("CurrentPickup", "Response Sent");
+        SingletonRequestQueue.getInstance(ctx.getApplicationContext()).addToRequestQueue(jsObjRequest);
+    }
+
+    public synchronized JsonObjectRequest getJsonObject(final Context ctx, JSONObject params){
+        JsonObjectRequest ret = new JsonObjectRequest
                 (Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
 
                     @Override
@@ -77,8 +96,11 @@ public class CurrentPickup implements Serializable {
                             pickupID = response.getInt("pickupID");
                             details = response.getString("details");
                             sizeOfPickup = response.getInt("sizeOfPickup");
-                            updateMap(NavFragment.map);
+                            complete = false;
                             Log.d("CurrentPickup", "Response: " + response.toString());
+                            Log.d("CurrentPickup", "Object Data: " + getString());
+                            save(ctx);
+                            Log.d("MapReady", "Signalling MapReady");
                         }
                         catch (JSONException e){
                             e.printStackTrace();
@@ -101,19 +123,23 @@ public class CurrentPickup implements Serializable {
                 return headers;
             }
         };
-        Log.d("CurrentPickup", "Response Sent");
-        SingletonRequestQueue.getInstance(ctx.getApplicationContext()).addToRequestQueue(jsObjRequest);
+        lock.unlock();
+        return ret;
     }
-    public void updateMap(GoogleMap mMap){
+
+    public synchronized void updateMap(GoogleMap mMap) throws InterruptedException {
+        lock.lock();
+        Log.d("MapReady", "Waiting for Signal");
         LatLngBounds currentScope = new LatLngBounds(pickupLoc, new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
-        Log.d("CircuitPickup UpdateMap", pickupLoc.toString());
-        Log.d("CircuitPickup UpdateMap", "mainActivity.gpsChecker.lat");
-        Log.d("CircuitPickup UpdateMap", "mainActivity.gpsChecker.lng");
+        Log.d("UpdateMap", pickupLoc.toString());
+        Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lat));
+        Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lng));
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(currentScope, 200));
         mMap.addMarker(new MarkerOptions()
                 .position(pickupLoc)
                 .title(name)
                 .snippet(address));
+        lock.unlock();
     }
 
     //Serialise Object
@@ -131,19 +157,21 @@ public class CurrentPickup implements Serializable {
         }
     }
     //Load object
-    public static CurrentPickup load(Context ctx){
+    public static void load(Context ctx){
         try {
             Log.d("Load", "Loading Current Pickup...");
             FileInputStream fis = ctx.openFileInput("currentPickup.data");
             ObjectInputStream is = new ObjectInputStream(fis);
-            CurrentPickup cur = (CurrentPickup) is.readObject();
+            mainActivity.currentPickup = (CurrentPickup) is.readObject();
             is.close();
             fis.close();
             Log.d("Load", "Load Complete");
-            return cur;
         } catch(Exception e) {
             e.printStackTrace();
-            return null;
         }
+    }
+
+    public static String getString(){
+        return name + " " + address + " " + complete;
     }
 }
