@@ -39,6 +39,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CurrentPickup implements Serializable {
     private String url = "https://www.nappyzap.com/androidInterface/getCurrentJob.php";
     private Map<String, String> params;
+    private static final long serialVersionUID = 465487646;
     static String name;
     static String phoneNo;
     static LatLng pickupLoc;
@@ -49,8 +50,7 @@ public class CurrentPickup implements Serializable {
     static int pickupID;
     static boolean complete;
     private JsonObjectRequest jsObjRequest;
-    public final static Lock lock = new ReentrantLock();
-    public final static Condition mapReady = lock.newCondition();
+    private static GoogleMap map;
 
     public CurrentPickup(){
         complete = true;
@@ -64,7 +64,6 @@ public class CurrentPickup implements Serializable {
     }
 
     public CurrentPickup(final int driverID, final Context ctx) {
-        lock.lock();
         JSONObject params = new JSONObject();
         try {
             params.put("driverID", Integer.toString(driverID));
@@ -75,9 +74,8 @@ public class CurrentPickup implements Serializable {
             e.printStackTrace();
         }
         Log.d("CurrentPickup", "Request Prepared");
-        jsObjRequest = getJsonObject(ctx, params);
-        Log.d("CurrentPickup", "Response Sent");
-        SingletonRequestQueue.getInstance(ctx.getApplicationContext()).addToRequestQueue(jsObjRequest);
+        Log.d("CurrentPickup", "Request Sent");
+        SingletonRequestQueue.getInstance(ctx.getApplicationContext()).addToRequestQueue(getJsonObject(ctx, params));
     }
 
     public synchronized JsonObjectRequest getJsonObject(final Context ctx, JSONObject params){
@@ -100,6 +98,7 @@ public class CurrentPickup implements Serializable {
                             Log.d("CurrentPickup", "Response: " + response.toString());
                             Log.d("CurrentPickup", "Object Data: " + getString());
                             save(ctx);
+                            updateMap();
                             Log.d("MapReady", "Signalling MapReady");
                         }
                         catch (JSONException e){
@@ -123,23 +122,20 @@ public class CurrentPickup implements Serializable {
                 return headers;
             }
         };
-        lock.unlock();
         return ret;
     }
 
-    public synchronized void updateMap(GoogleMap mMap) throws InterruptedException {
-        lock.lock();
-        Log.d("MapReady", "Waiting for Signal");
+    public synchronized void updateMap(){
+        Log.d("MapReady", "updating...");
         LatLngBounds currentScope = new LatLngBounds(pickupLoc, new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
         Log.d("UpdateMap", pickupLoc.toString());
         Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lat));
         Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lng));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(currentScope, 200));
-        mMap.addMarker(new MarkerOptions()
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(currentScope, 200));
+        map.addMarker(new MarkerOptions()
                 .position(pickupLoc)
                 .title(name)
                 .snippet(address));
-        lock.unlock();
     }
 
     //Serialise Object
@@ -173,5 +169,9 @@ public class CurrentPickup implements Serializable {
 
     public static String getString(){
         return name + " " + address + " " + complete;
+    }
+
+    public static void setMap(GoogleMap mMap){
+        map = mMap;
     }
 }

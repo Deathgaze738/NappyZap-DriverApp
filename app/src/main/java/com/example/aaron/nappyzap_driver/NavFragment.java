@@ -40,15 +40,12 @@ import java.util.Map;
  */
 public class NavFragment extends Fragment implements OnMapReadyCallback {
 
-    public static GoogleMap map;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.navigation_fragment, null, false);
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        map = mapFragment.getMap();
         if(mainActivity.currentPickup.complete) {
             //Initialize GSPTracker and update current pickup
             mainActivity.currentPickup = new CurrentPickup(1, getActivity());
@@ -60,11 +57,8 @@ public class NavFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap mMap) {
         if(mMap!=null) {
             mMap.setMyLocationEnabled(true);
-            try {
-                mainActivity.currentPickup.updateMap(mMap);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            mainActivity.currentPickup.setMap(mMap);
+            mainActivity.currentPickup.updateMap();
         }
         else{
             Log.d("NavFragment", "Map was null");
