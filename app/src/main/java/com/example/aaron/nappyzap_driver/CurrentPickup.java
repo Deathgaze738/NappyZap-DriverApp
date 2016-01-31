@@ -127,7 +127,12 @@ public class CurrentPickup implements Serializable {
 
     public synchronized void updateMap(){
         Log.d("MapReady", "updating...");
-        LatLngBounds currentScope = new LatLngBounds(pickupLoc, new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
+        LatLngBounds currentScope;
+        try {
+            currentScope = new LatLngBounds(pickupLoc, new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
+        }catch (Exception e){
+            currentScope = new LatLngBounds(new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng), pickupLoc);
+        }
         Log.d("UpdateMap", pickupLoc.toString());
         Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lat));
         Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lng));
@@ -153,18 +158,20 @@ public class CurrentPickup implements Serializable {
         }
     }
     //Load object
-    public static void load(Context ctx){
+    public CurrentPickup load(Context ctx){
         try {
             Log.d("Load", "Loading Current Pickup...");
             FileInputStream fis = ctx.openFileInput("currentPickup.data");
             ObjectInputStream is = new ObjectInputStream(fis);
-            mainActivity.currentPickup = (CurrentPickup) is.readObject();
+            CurrentPickup temp = (CurrentPickup) is.readObject();
             is.close();
             fis.close();
             Log.d("Load", "Load Complete");
+            return temp;
         } catch(Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public static String getString(){

@@ -51,15 +51,11 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         File file;
         file = getBaseContext().getFileStreamPath("currentPickup.data");
+        currentPickup = new CurrentPickup();
         if(file.exists()){
             Log.d("FileLoad", "File Exists, loading...");
-            CurrentPickup.load(this);
+            this.currentPickup = currentPickup.load(this);
             //file.delete();
-        }
-        else{
-            Log.d("FileLoad", "No file, creating new...");
-            CurrentPickup temp = new CurrentPickup();
-            currentPickup = temp;
         }
         Log.d("String", currentPickup.getString());
 
