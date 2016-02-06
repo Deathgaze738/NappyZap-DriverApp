@@ -1,5 +1,6 @@
 package com.example.aaron.nappyzap_driver;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,22 +39,33 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by Aaron on 12/12/2015.
  */
 public class CurrentPickup implements Serializable {
+    private static CurrentPickup pickupInstance = null;
     private String url = "https://www.nappyzap.com/androidInterface/getCurrentJob.php";
     private Map<String, String> params;
-    private static final long serialVersionUID = 465487646;
-    static String name;
-    static String phoneNo;
-    static LatLng pickupLoc;
-    static String binLocation;
-    static String address;
-    static String details;
-    static int sizeOfPickup;
-    static int pickupID;
-    static boolean complete;
+    private static final long serialVersionUID = 465487644;
+    private String name;
+    private String phoneNo;
+    private transient LatLng pickupLoc;
+    private String binLocation;
+    private String address;
+    private String details;
+    private int sizeOfPickup;
+    private int pickupID;
+    private boolean complete;
     private JsonObjectRequest jsObjRequest;
     private static GoogleMap map;
+    private static File file;
 
-    public CurrentPickup(){
+    public static CurrentPickup getInstance()
+    {
+        if (pickupInstance == null)
+        {
+            pickupInstance = new CurrentPickup();
+        }
+        return pickupInstance;
+    }
+
+    private CurrentPickup(){
         complete = true;
         name = "No Current Pickup";
         phoneNo = "";
@@ -63,7 +76,11 @@ public class CurrentPickup implements Serializable {
         sizeOfPickup = 0;
     }
 
-    public CurrentPickup(final int driverID, final Context ctx) {
+    public void resetPickup(){
+        pickupInstance = new CurrentPickup();
+    }
+
+    public void setNewPickup(int driverID, Context ctx) {
         JSONObject params = new JSONObject();
         try {
             params.put("driverID", Integer.toString(driverID));
@@ -78,7 +95,7 @@ public class CurrentPickup implements Serializable {
         SingletonRequestQueue.getInstance(ctx.getApplicationContext()).addToRequestQueue(getJsonObject(ctx, params));
     }
 
-    public synchronized JsonObjectRequest getJsonObject(final Context ctx, JSONObject params){
+    private synchronized JsonObjectRequest getJsonObject(final Context ctx, JSONObject params){
         JsonObjectRequest ret = new JsonObjectRequest
                 (Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
 
@@ -99,6 +116,8 @@ public class CurrentPickup implements Serializable {
                             Log.d("CurrentPickup", "Object Data: " + getString());
                             save(ctx);
                             updateMap();
+                            Toast.makeText(ctx.getApplicationContext(), "New Pickup Received", Toast.LENGTH_SHORT).show();
+                            mainActivity.curJobFrag.populateView();
                             Log.d("MapReady", "Signalling MapReady");
                         }
                         catch (JSONException e){
@@ -110,6 +129,7 @@ public class CurrentPickup implements Serializable {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
+                        Toast.makeText(ctx.getApplicationContext(), "No more deliveries available", Toast.LENGTH_SHORT).show();
                         Log.d("CurrentPickup", "Response Error");
                         Log.d("CurrentPickup", "onErrorResponse: " + error.getMessage());
                     }
@@ -127,12 +147,11 @@ public class CurrentPickup implements Serializable {
 
     public synchronized void updateMap(){
         Log.d("MapReady", "updating...");
+        LatLngBounds.Builder build = new LatLngBounds.Builder();
         LatLngBounds currentScope;
-        try {
-            currentScope = new LatLngBounds(pickupLoc, new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
-        }catch (Exception e){
-            currentScope = new LatLngBounds(new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng), pickupLoc);
-        }
+        build.include(pickupLoc);
+        build.include(new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
+        currentScope = build.build();
         Log.d("UpdateMap", pickupLoc.toString());
         Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lat));
         Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lng));
@@ -147,38 +166,94 @@ public class CurrentPickup implements Serializable {
     public void save(Context ctx){
         try {
             Log.d("Save", "Saving Current Pickup...");
-            FileOutputStream fos = ctx.openFileOutput("currentPickup.data" , Context.MODE_PRIVATE);
+            FileOutputStream fos = ctx.openFileOutput("currentPickup.data" , ctx.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(this);
+            os.writeObject(name);
+            os.writeObject(phoneNo);
+            os.writeDouble(pickupLoc.latitude);
+            os.writeDouble(pickupLoc.longitude);
+            os.writeObject(binLocation);
+            os.writeObject(address);
+            os.writeObject(details);
+            os.writeInt(sizeOfPickup);
+            os.writeInt(pickupID);
+            os.writeBoolean(complete);
             os.close();
             fos.close();
             Log.d("Save", "Save Complete");
+            Log.d("Save", getString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     //Load object
-    public CurrentPickup load(Context ctx){
+    public void load(Context ctx){
         try {
             Log.d("Load", "Loading Current Pickup...");
             FileInputStream fis = ctx.openFileInput("currentPickup.data");
             ObjectInputStream is = new ObjectInputStream(fis);
-            CurrentPickup temp = (CurrentPickup) is.readObject();
+            this.name = is.readObject().toString();
+            this.phoneNo = is.readObject().toString();
+            this.pickupLoc = new LatLng(is.readDouble(), is.readDouble());
+            this.binLocation = is.readObject().toString();
+            this.address = is.readObject().toString();
+            this.details = is.readObject().toString();
+            this.sizeOfPickup = is.readInt();
+            this.pickupID = is.readInt();
+            this.complete = is.readBoolean();
             is.close();
             fis.close();
+            if(!complete) {
+                Toast.makeText(ctx.getApplicationContext(), "Previous pickup loaded!", Toast.LENGTH_SHORT).show();
+            }
             Log.d("Load", "Load Complete");
-            return temp;
+            Log.d("Load", getString());
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    public static String getString(){
+    public String getString(){
         return name + " " + address + " " + complete;
     }
 
-    public static void setMap(GoogleMap mMap){
+    public void setMap(GoogleMap mMap){
         map = mMap;
+    }
+
+    public Boolean getStatus(){
+        return complete;
+    }
+
+    public void flipStatus(){
+        complete = !complete;
+    }
+
+    public int getPickupID() {
+        return pickupID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNo(){
+        return phoneNo;
+    }
+
+    public String getAddress(){
+        return address;
+    }
+
+    public String getDetails(){
+        return details;
+    }
+
+    public String getBinLocation(){
+        return binLocation;
+    }
+
+    public int getSizeOfPickup(){
+        return sizeOfPickup;
     }
 }

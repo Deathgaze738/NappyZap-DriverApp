@@ -7,8 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="5dip"
     map:uiRotateGestures="false"
-    map:uiScrollGestures="false"
-    map:uiZoomGestures="false"
     map:uiZoomControls="false"
     map:uiTiltGestures="false"
     tools:layout="@layout/navigation_fragment" />

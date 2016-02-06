@@ -2,15 +2,19 @@ package com.example.aaron.nappyzap_driver;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -49,12 +53,6 @@ public class CurrentJobFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Inflate the layout for this fragment
-        fullName = (TextView) getView().findViewById(R.id.textFullName);
-        address = (TextView) getView().findViewById(R.id.textAddress);
-        details = (TextView) getView().findViewById(R.id.textDetails);
-        size = (TextView) getView().findViewById(R.id.textSize);
-        request = (Button) getView().findViewById(R.id.btnRequest);
-        request.setOnClickListener(requestClicked);
         populateView();
     }
 
@@ -72,18 +70,37 @@ public class CurrentJobFragment extends Fragment {
         super.onDestroyView();
     }
 
-    protected void populateView(){
+    public void populateView(){
         //Get Text Views
-        fullName.setText(mainActivity.currentPickup.name+", "+mainActivity.currentPickup.phoneNo);
-        address.setText(mainActivity.currentPickup.binLocation + ", " + mainActivity.currentPickup.address);
-        details.setText(mainActivity.currentPickup.details);
-        size.setText(String.valueOf(mainActivity.currentPickup.sizeOfPickup));
-        setRequestBtn(request);
+        try {
+            CurrentPickup cur = CurrentPickup.getInstance();
+            fullName = (TextView) getView().findViewById(R.id.textFullName);
+            address = (TextView) getView().findViewById(R.id.textAddress);
+            details = (TextView) getView().findViewById(R.id.textDetails);
+            size = (TextView) getView().findViewById(R.id.textSize);
+            request = (Button) getView().findViewById(R.id.btnRequest);
+            request.setOnClickListener(requestClicked);
+            if (cur.getStatus()) {
+                fullName.setText("No Pickup Available");
+                address.setText("Please Request a new Pickup");
+                details.setText("");
+                size.setText("");
+            } else {
+                fullName.setText(cur.getName() + ", " + cur.getPhoneNo());
+                address.setText(cur.getBinLocation() + ", " + cur.getAddress());
+                details.setText(cur.getDetails());
+                size.setText(String.valueOf(cur.getSizeOfPickup()));
+            }
+            setRequestBtn(request);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public void setRequestBtn(View view){
+    private void setRequestBtn(View view){
         //Request or Complete pickup
-        Boolean requestFlag = mainActivity.currentPickup.complete;
+        Boolean requestFlag = CurrentPickup.getInstance().getStatus();
         if(requestFlag){
             request.setText("Request New Pickup");
         }
@@ -95,11 +112,11 @@ public class CurrentJobFragment extends Fragment {
     View.OnClickListener requestClicked = new View.OnClickListener() {
         public void onClick(View v) {
             Log.d("RequestClick", "Entered View");
-            if(mainActivity.currentPickup.complete){
+            if(CurrentPickup.getInstance().getStatus()){
                 Log.d("RequestClick", "Requesting a new pickup...");
                 requestNewPickup();
             }
-            else if(!mainActivity.currentPickup.complete){
+            else if(!CurrentPickup.getInstance().getStatus()){
                 Log.d("RequestClick", "Completing Current Pickup...");
                 completeCurrentPickup();
             }
@@ -108,12 +125,13 @@ public class CurrentJobFragment extends Fragment {
 
     private void requestNewPickup(){
         Log.d("Request", "Pickup Requested");
-        mainActivity.currentPickup = new CurrentPickup(1, this.getActivity());
-        mainActivity.currentPickup.save(this.getActivity());
-        populateView();
+        CurrentPickup.getInstance().setNewPickup(1, getActivity());
+        CurrentPickup.getInstance().updateMap();
+        CurrentPickup.getInstance().save(getActivity());
     }
 
     private void completeCurrentPickup(){
+        dialog.setCtx(getActivity());
         dialog.show(getFragmentManager(), "complete");
     }
 }

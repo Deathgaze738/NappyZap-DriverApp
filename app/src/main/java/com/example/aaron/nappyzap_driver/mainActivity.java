@@ -3,6 +3,7 @@ package com.example.aaron.nappyzap_driver;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -25,11 +26,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class mainActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     //hardcoded driver ID
-    private int driverID = 1;
+    public static int driverID = 1;
 
     private Fragment curFragment;
     private String[] mNav;
@@ -37,8 +42,9 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ListView mDrawerList;
     //GPS Manager
     public static GPSChecker gpsChecker;
-    public static CurrentPickup currentPickup;
 
+    //Fragments
+    public static CurrentJobFragment curJobFrag = new CurrentJobFragment();
     private static int lastClicked = 0;
 
     @Override
@@ -51,10 +57,14 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         File file;
         file = getBaseContext().getFileStreamPath("currentPickup.data");
-        currentPickup = new CurrentPickup();
+        CurrentPickup currentPickup = CurrentPickup.getInstance();
         if(file.exists()){
             Log.d("FileLoad", "File Exists, loading...");
-            this.currentPickup = currentPickup.load(this);
+            currentPickup.load(this);
+            if(currentPickup.getStatus()){
+                Log.d("Main", "Pickup Reset");
+                currentPickup.resetPickup();
+            }
             //file.delete();
         }
         Log.d("String", currentPickup.getString());
@@ -70,13 +80,6 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mNav));
         mDrawerList.setItemChecked(0, true);
-
-        if(CurrentPickup.complete){
-
-        }
-        else if(!CurrentPickup.complete){
-
-        }
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
@@ -95,8 +98,8 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 swapFragment(curFragment, position);
             }
             if (position == 1) {
-                curFragment = new CurrentJobFragment();
-                swapFragment(curFragment, position);
+                curFragment = curJobFrag;
+                swapFragment(curJobFrag, position);
             }
             if (position == 2) {
                 logout();
@@ -129,7 +132,7 @@ public class mainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     protected void onDestroy(){
-        currentPickup.save(this);
+        //currentPickup.save(this);
         try{
             Fragment fragment = getFragmentManager().findFragmentById(R.id.map);
             FragmentTransaction ft = this.getFragmentManager().beginTransaction();

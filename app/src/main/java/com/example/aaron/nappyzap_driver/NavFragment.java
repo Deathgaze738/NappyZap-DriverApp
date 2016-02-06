@@ -46,9 +46,10 @@ public class NavFragment extends Fragment implements OnMapReadyCallback {
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        if(mainActivity.currentPickup.complete) {
+        CurrentPickup cur = CurrentPickup.getInstance();
+        if(cur.getStatus()) {
             //Initialize GSPTracker and update current pickup
-            mainActivity.currentPickup = new CurrentPickup(1, getActivity());
+            cur.setNewPickup(1, getActivity());
         }
         Log.d("NavFragment", "Successfully inflated.");
         return v;
@@ -57,8 +58,8 @@ public class NavFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap mMap) {
         if(mMap!=null) {
             mMap.setMyLocationEnabled(true);
-            mainActivity.currentPickup.setMap(mMap);
-            mainActivity.currentPickup.updateMap();
+            CurrentPickup.getInstance().setMap(mMap);
+            CurrentPickup.getInstance().updateMap();
         }
         else{
             Log.d("NavFragment", "Map was null");
