@@ -146,20 +146,27 @@ public class CurrentPickup implements Serializable {
     }
 
     public synchronized void updateMap(){
-        Log.d("MapReady", "updating...");
-        LatLngBounds.Builder build = new LatLngBounds.Builder();
-        LatLngBounds currentScope;
-        build.include(pickupLoc);
-        build.include(new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
-        currentScope = build.build();
-        Log.d("UpdateMap", pickupLoc.toString());
-        Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lat));
-        Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lng));
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(currentScope, 200));
-        map.addMarker(new MarkerOptions()
-                .position(pickupLoc)
-                .title(name)
-                .snippet(address));
+        if(map != null) {
+            Log.d("MapReady", "updating...");
+            LatLngBounds.Builder build = new LatLngBounds.Builder();
+            LatLngBounds currentScope;
+            build.include(pickupLoc);
+            build.include(new LatLng(mainActivity.gpsChecker.lat, mainActivity.gpsChecker.lng));
+            currentScope = build.build();
+            Log.d("UpdateMap", pickupLoc.toString());
+            Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lat));
+            Log.d("UpdateMap", Double.toString(mainActivity.gpsChecker.lng));
+            try {
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(currentScope, 200));
+                map.addMarker(new MarkerOptions()
+                        .position(pickupLoc)
+                        .title(name)
+                        .snippet(address));
+            }catch (Exception e){
+                LatLng london =  new LatLng(51.5361582, -0.1360325);
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(london, 11));
+            }
+        }
     }
 
     //Serialise Object

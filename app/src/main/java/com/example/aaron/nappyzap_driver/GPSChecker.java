@@ -60,6 +60,7 @@ public class GPSChecker extends Service implements LocationListener{
             }
 
             //If the application can use GPS or Network coordinates
+
             if(!provider_info.isEmpty()){
                 locationManager.requestLocationUpdates(provider_info,
                                                     MIN_TIME_BW_UPDATES,
