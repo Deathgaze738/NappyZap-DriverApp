@@ -38,7 +38,6 @@ public class CurrentJobFragment extends Fragment {
     TextView fullName;
     TextView address;
     TextView details;
-    TextView size;
     Button request;
     completeDialog dialog = new completeDialog();
 
@@ -76,20 +75,17 @@ public class CurrentJobFragment extends Fragment {
             CurrentPickup cur = CurrentPickup.getInstance();
             fullName = (TextView) getView().findViewById(R.id.textFullName);
             address = (TextView) getView().findViewById(R.id.textAddress);
-            details = (TextView) getView().findViewById(R.id.textDetails);
-            size = (TextView) getView().findViewById(R.id.textSize);
             request = (Button) getView().findViewById(R.id.btnRequest);
+            details = (TextView) getView().findViewById(R.id.textDetails);
             request.setOnClickListener(requestClicked);
             if (cur.getStatus()) {
                 fullName.setText("No Pickup Available");
                 address.setText("Please Request a new Pickup");
                 details.setText("");
-                size.setText("");
             } else {
                 fullName.setText(cur.getName() + ", " + cur.getPhoneNo());
                 address.setText(cur.getBinLocation() + ", " + cur.getAddress());
                 details.setText(cur.getDetails());
-                size.setText(String.valueOf(cur.getSizeOfPickup()));
             }
             setRequestBtn(request);
         }

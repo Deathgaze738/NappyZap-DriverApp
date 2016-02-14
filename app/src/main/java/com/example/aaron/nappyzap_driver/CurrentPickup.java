@@ -49,7 +49,6 @@ public class CurrentPickup implements Serializable {
     private String binLocation;
     private String address;
     private String details;
-    private int sizeOfPickup;
     private int pickupID;
     private boolean complete;
     private JsonObjectRequest jsObjRequest;
@@ -73,7 +72,6 @@ public class CurrentPickup implements Serializable {
         address = "Please request a new pickup!";
         binLocation = "";
         details = "";
-        sizeOfPickup = 0;
     }
 
     public void resetPickup(){
@@ -110,7 +108,6 @@ public class CurrentPickup implements Serializable {
                             address = response.getString("houseNo")+", "+response.getString("street")+", "+response.getString("city")+", "+response.getString("county")+", "+response.getString("postcode");
                             pickupID = response.getInt("pickupID");
                             details = response.getString("details");
-                            sizeOfPickup = response.getInt("sizeOfPickup");
                             complete = false;
                             Log.d("CurrentPickup", "Response: " + response.toString());
                             Log.d("CurrentPickup", "Object Data: " + getString());
@@ -182,7 +179,6 @@ public class CurrentPickup implements Serializable {
             os.writeObject(binLocation);
             os.writeObject(address);
             os.writeObject(details);
-            os.writeInt(sizeOfPickup);
             os.writeInt(pickupID);
             os.writeBoolean(complete);
             os.close();
@@ -205,7 +201,6 @@ public class CurrentPickup implements Serializable {
             this.binLocation = is.readObject().toString();
             this.address = is.readObject().toString();
             this.details = is.readObject().toString();
-            this.sizeOfPickup = is.readInt();
             this.pickupID = is.readInt();
             this.complete = is.readBoolean();
             is.close();
@@ -258,9 +253,5 @@ public class CurrentPickup implements Serializable {
 
     public String getBinLocation(){
         return binLocation;
-    }
-
-    public int getSizeOfPickup(){
-        return sizeOfPickup;
     }
 }
